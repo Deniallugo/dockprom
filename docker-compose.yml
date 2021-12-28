@@ -7,7 +7,7 @@ volumes:
 services:
 
   prometheus:
-    image: prom/prometheus:v2.31.1
+    image: prom/prometheus:v2.32.1
     container_name: prometheus
     volumes:
       - ./prometheus:/etc/prometheus
@@ -20,11 +20,13 @@ services:
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
     network_mode: "host"
+    expose:
+      - 9090
     labels:
       org.label-schema.group: "monitoring"
 
   grafana:
-    image: grafana/grafana:8.3.0
+    image: grafana/grafana:8.3.3
     container_name: grafana
     volumes:
       - grafana_data:/var/lib/grafana
